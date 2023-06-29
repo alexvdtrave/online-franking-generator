@@ -4,7 +4,6 @@
   "description": "",
   "author": "alexvdtrave",
   "license": "MIT",
-  "private": true,
   "main": "index.js",
   "homepage": "https://github.com/alexvdtrave/online-franking-generator",
   "repository": {
