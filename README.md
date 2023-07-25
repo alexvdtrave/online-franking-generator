@@ -14,9 +14,9 @@ npm install @alexvdtrave/online-franking-generator
 
 This is an example of how a CSV file can be generated.
 ```
-const {
+import {
   FrankingGenerator, Address, Shipment, Product,
-} = require('@alexvdtrave/online-franking-generator');
+} from '@alexvdtrave/online-franking-generator';
 
 const sender = new Address();
 sender.name = 'Erika Mustermann';
