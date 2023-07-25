@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-class Address {
+export default class Address {
   get name() {
     return this._name;
   }
@@ -64,5 +64,3 @@ class Address {
     this._email = email;
   }
 }
-
-module.exports = Address;

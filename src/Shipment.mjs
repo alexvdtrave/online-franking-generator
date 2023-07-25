@@ -1,4 +1,4 @@
-class Shipment {
+export default class Shipment {
   #sender;
 
   #recipient;
@@ -45,5 +45,3 @@ class Shipment {
     this.#product = product;
   }
 }
-
-module.exports = Shipment;

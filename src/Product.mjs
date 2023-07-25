@@ -18,7 +18,7 @@ const products = {
   },
 };
 
-class Product {
+export default class Product {
   static get DEU() {
     return products.DEU;
   }
@@ -27,5 +27,3 @@ class Product {
     return products.EU;
   }
 }
-
-module.exports = Product;

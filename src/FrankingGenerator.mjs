@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const { createObjectCsvWriter } = require('csv-writer');
+import { createObjectCsvWriter } from 'csv-writer';
 
 function prefixAddress(prefix, address) {
   const result = Object.fromEntries(
@@ -9,7 +9,7 @@ function prefixAddress(prefix, address) {
   return result;
 }
 
-class FrankingGenerator {
+export default class FrankingGenerator {
   static #HEADER = [
     { id: 'send_name', title: 'SEND_NAME1' },
     { id: 'send_addressLine', title: 'SEND_NAME2' },
@@ -49,5 +49,3 @@ class FrankingGenerator {
     await csvWriter.writeRecords(records);
   }
 }
-
-module.exports = FrankingGenerator;
