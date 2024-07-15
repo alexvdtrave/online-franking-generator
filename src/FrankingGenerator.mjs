@@ -1,5 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-import { createObjectCsvWriter } from 'csv-writer';
+ import { createObjectCsvWriter } from 'csv-writer';
 
 function prefixAddress(prefix, address) {
   const result = Object.fromEntries(

@@ -1,5 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-export default class Address {
+ export default class Address {
   get name() {
     return this._name;
   }
