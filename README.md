@@ -1,4 +1,6 @@
-# online-franking-generator
+# Online Franking Generator
+![Node CI](https://github.com/alexvdtrave/online-franking-generator/actions/workflows/node-ci.yml/badge.svg)
+![CodeQL](https://github.com/alexvdtrave/online-franking-generator/actions/workflows/github-code-scanning/codeql/badge.svg)
 
 This is a Node.js library to generate csv files for usage in DHL online franking.
 
@@ -6,14 +8,18 @@ The CSV import can be used on this page:
 https://www.dhl.de/de/privatkunden/pakete-versenden/online-frankieren.html?type=ShoppingCartImport
 
 ### Installing
+You may need to add the following to ```.npmrc```.
 ```
+@alexvdtrave:registry=https://npm.pkg.github.com
+```
+```shell
 npm install @alexvdtrave/online-franking-generator
 ```
 
 ### Usage
 
 This is an example of how a CSV file can be generated.
-```
+```JavaScript
 import {
   FrankingGenerator, Address, Shipment, Product,
 } from '@alexvdtrave/online-franking-generator';
@@ -45,7 +51,7 @@ Erika Mustermann,,Gartenstr.,20,18556,Kleinkleckersdorf,DEU,Otto Normalverbrauch
 ```
 
 ## Running the tests
-```
+```shell
 npm test
 npm run lint
 ```
