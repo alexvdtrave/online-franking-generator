@@ -1,11 +1,37 @@
- import { createObjectCsvWriter } from 'csv-writer';
+import fs from 'node:fs/promises';
 
-function prefixAddress(prefix, address) {
-  const result = Object.fromEntries(
-    Object.entries(address).map(([k, v]) => [prefix + k, v]),
-  );
+const ADDRESS_FIELDS = [
+  'name',
+  'addressLine',
+  'street',
+  'houseNumber',
+  'postalCode',
+  'city',
+  'countryCode',
+  'email',
+];
+
+function prefixAddress(prefix, address = {}) {
+  const result = {};
+  for (const field of ADDRESS_FIELDS) {
+    const val = address[field] ?? address[`_${field}`];
+    if (val !== undefined && val !== null) {
+      result[`${prefix}_${field}`] = val;
+    }
+  }
 
   return result;
+}
+
+function escapeCsvValue(value) {
+  if (value === undefined || value === null) {
+    return '';
+  }
+  const str = String(value);
+  if (str.includes('"') || str.includes(',') || str.includes('\n') || str.includes('\r')) {
+    return `"${str.replaceAll('"', '""')}"`;
+  }
+  return str;
 }
 
 export default class FrankingGenerator {
@@ -32,19 +58,31 @@ export default class FrankingGenerator {
     { id: 'recv_email', title: 'RECV_EMAIL' },
   ];
 
-  static async saveToFile(shippments, outputPath) {
-    const records = shippments.map((x) => ({
-      ...prefixAddress('send', x.sender),
-      ...prefixAddress('recv', x.recipient),
-      ...{ coupon: x.coupon },
-      ...{ product: x.product },
-    }));
+  static generateCsv(shipments = []) {
+    const headerRow = FrankingGenerator.#HEADER.map((h) => h.title).join(',');
+    const rows = shipments.map((x) => {
+      const record = {
+        ...prefixAddress('send', x.sender),
+        ...prefixAddress('recv', x.recipient),
+        coupon: x.coupon,
+        product: x.product,
+      };
 
-    const csvWriter = createObjectCsvWriter({
-      path: outputPath,
-      header: FrankingGenerator.#HEADER,
+      return FrankingGenerator.#HEADER
+        .map((h) => escapeCsvValue(record[h.id]))
+        .join(',');
     });
 
-    await csvWriter.writeRecords(records);
+    return [headerRow, ...rows].join('\n') + '\n';
+  }
+
+  static toCsv(shipments = []) {
+    return FrankingGenerator.generateCsv(shipments);
+  }
+
+  static async saveToFile(shipments, outputPath) {
+    const csvContent = FrankingGenerator.generateCsv(shipments);
+    await fs.writeFile(outputPath, csvContent, 'utf-8');
   }
 }
+

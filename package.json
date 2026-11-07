@@ -22,18 +22,17 @@
     "csv"
   ],
   "engines": {
-    "node": "20.x.x"
+    "node": ">=26.0.0"
   },
   "scripts": {
     "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "test:watch": "node --test --watch",
     "lint": "eslint src/**.mjs test/**.mjs --fix"
   },
-  "dependencies": {
-    "csv-writer": "^1.6.0"
-  },
   "devDependencies": {
-    "@eslint/js": "^9.14.0",
-    "eslint": "^9.14.0",
-    "globals": "^15.12.0"
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^15.15.0"
   }
 }

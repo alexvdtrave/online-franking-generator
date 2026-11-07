@@ -53,9 +53,15 @@ Erika Mustermann,,Gartenstr.,20,18556,Kleinkleckersdorf,DEU,Otto Normalverbrauch
 ## Running the tests
 ```shell
 npm test
+npm run test:coverage
 npm run lint
 ```
+
+## Requirements
+- Node.js >= 26.0.0
+- Zero runtime dependencies
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
